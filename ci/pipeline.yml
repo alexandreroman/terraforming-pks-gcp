@@ -39,8 +39,8 @@ resources:
   type: pivnet
   source:
     api_token: ((pivnet_api_token))
-    product_slug: stemcells
-    product_version: 3468\..*
+    product_slug: ((stemcell-name)) 
+    product_version: ((product-version))
 - name: keyval
   type: keyval
 
@@ -450,13 +450,13 @@ jobs:
           eval $install_pivnet_cli_cmd
           eval $auth_cmd
 
-          PRODUCT_ID=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '.id' -r)
-          DOWNLOAD_URL=$(./pivnet product-files -p pivotal-container-service -r 1.1.4 --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '._links.download.href' -r)
-          FILENAME=$(./pivnet product-files -p pivotal-container-service -r 1.1.4 --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '.name' -r)
-
-          echo $PRODUCT_ID
-          echo $DOWNLOAD_URL
-          echo $FILENAME
+          PRODUCT_ID=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '.id' -r)
+          DOWNLOAD_URL=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '._links.download.href' -r)
+          FILENAME=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '.aws_object_key' -r)
+          FILENAME="${FILENAME##*/}"
+          echo Product ID is $PRODUCT_ID
+          echo Download URL is $DOWNLOAD_URL
+          echo Filename is $FILENAME
   
           cat <<EOF > service-account.json
           ${GCP_SERVICE_ACCOUNT_KEY}
@@ -489,7 +489,7 @@ jobs:
           if [ "${LS}" = "${FILENAME}" ];then
             echo "${FILENAME} exists"
           else
-            echo "Downloading ${FILENAME} from ${DOWNLOAD_URL} on OspMamager"
+            echo "Downloading ${FILENAME} from ${DOWNLOAD_URL} on OspManager"
             gcloud compute ssh ubuntu@${PKS_ENV_PREFIX}-ops-manager \
                 --zone ${ZONE} \
                 --force-key-file-overwrite \
@@ -577,9 +577,10 @@ jobs:
           eval $install_pivnet_cli_cmd
           eval $auth_cmd
 
-          PRODUCT_ID=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '.id' -r)
-          DOWNLOAD_URL=$(./pivnet product-files -p pivotal-container-service -r 1.1.4 --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '._links.download.href' -r)
-          FILENAME=$(./pivnet product-files -p pivotal-container-service -r 1.1.4 --format=json | jq '.[] | select(.name | contains("pivotal-container-service"))' | jq '.name' -r)
+          PRODUCT_ID=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '.id' -r)
+          DOWNLOAD_URL=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '._links.download.href' -r)
+          FILENAME=$(./pivnet product-files -p pivotal-container-service -r ${RELEASE_VERSION} --format=json | jq '.[] | select(.name | contains("Pivotal Container Service"))' | jq '.aws_object_key' -r)
+          FILENAME="${FILENAME##*/}"
           PRODUCT_NAME="pivotal-container-service"
       
 
@@ -734,12 +735,13 @@ jobs:
     - get: stemcell
       params:
         globs: 
-        - "light-bosh-stemcell-3468\\.*-google-kvm-ubuntu-trusty-go_agent\\.tgz"
+        - ((stemcell)) 
       trigger: true
   - task: upload-stemcell
     params:
       OPS_MGR_USR: ((ops_mgr_usr))
       OPS_MGR_PWD: ((ops_mgr_pwd))
+      STEMCELL: ((stemcell))
     config:
       platform: linux
       image_resource:
@@ -757,14 +759,14 @@ jobs:
           set -eu
           cp /usr/local/bin/om-linux /usr/local/bin/om
           cp terraform-state/terraform.tfstate ./
-
+          echo stemcell  ${STEMCELL}
           OPSMAN_DOMAIN_OR_IP_ADDRESS=$(cat terraform.tfstate | jq -r '.modules[0].resources."google_compute_address.ops-manager-public-ip".primary.attributes.address')
           om --target https://${OPSMAN_DOMAIN_OR_IP_ADDRESS} -k \
               -u ${OPS_MGR_USR} \
               -p ${OPS_MGR_PWD} \
               --request-timeout 3600 \
               upload-stemcell \
-              -s stemcell/light-bosh-stemcell-3468.*-google-kvm-ubuntu-trusty-go_agent.tgz
+              -s stemcell/${STEMCELL}
 
 - name: deploy-pks
   build_logs_to_retain: 5

@@ -15,7 +15,7 @@ docker run --name concourse-db \
   -h concourse-postgres \
   -p 5432:5432 \
   -e POSTGRES_USER=concourse \
-  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
   -e POSTGRES_DB=atc \
   -d postgres 
   
@@ -23,13 +23,14 @@ echo "Creating Concourse Intance"
 docker run  --name concourse   -d\
   -h concourse \
   -p 8080:8080 \
+  -e CONCOURSE_EXTERNAL_URL=$CONCOURSE_URL \
   --privileged \
   --net=concourse-net \
   concourse/concourse quickstart \
-  --add-local-user concourse:password \
+  --add-local-user concourse:$CONCOURSE_PASSWORD \
   --main-team-local-user concourse \
   --postgres-user=concourse \
-  --postgres-password=password \
+  --postgres-password=$POSTGRES_PASSWORD \
   --postgres-host=concourse-db \
   --worker-garden-dns-server $dnsIP
   
