@@ -65,24 +65,24 @@ PIVNET_API_TOKEN="<REDACTED - get it from "edit profile" in network.pivotal.io>"
 TERRAFORM_BUCKET="<SHOULD_BE_UNIQUE>"
 GCP_PROJECT_ID="<REDACTED>"
 GCP_SERVICE_ACCOUNT_KEY_PATH="<FULL_PATH_TO_KEY_JSON. MAKE SURE THIS KEY.JSON PATH IS OUTSIDE THE GIT REPO DIRCTORY SO IT WILL NOT BE PUSHED BY MISTAKE!>"
-PKS_ENV_PREFIX="pksgcp"
-PKS_VERSION="1.2.0"
-PKS_CLI_USERNAME="admin"
-STEMCELL_FILENAME="light-bosh-stemcell-97.18-google-kvm-ubuntu-xenial-go_agent.tgz - THIS IS STILL NOT AUTOMATED ENOUGH, PLEASE CHOOSE THE CORRECT STEMCELL NAME FROM PIVOTAL NETWORK"
-PKS_CLI_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
-PKS_INITIAL_CLUSTER_NAME="pks-demo1"
-PKS_INITIAL_CLUSTER_SIZE="small"
 GCP_REGION="us-central1"     # Can be changed to local region
 GCP_ZONE_1="us-central1-a"   # Can be changed to zones within local region
 GCP_ZONE_2="us-central1-b"   # Can be changed to zones within local region
 GCP_ZONE_3="us-central1-c"   # Can be changed to zones within local region
-OPSMAN_IMAGE_URL="https://storage.googleapis.com/ops-manager-us/pcf-gcp-2.3-build.170.tar.gz"
+PKS_ENV_PREFIX="pksgcp"
+PKS_VERSION="1.2.0"
+PKS_CLI_USERNAME="admin"
+PKS_CLI_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
+PKS_INITIAL_CLUSTER_NAME="pks-demo1"
+PKS_INITIAL_CLUSTER_SIZE="small"
 CONCOURSE_URL="External URL or localhost,  FOR EXAMPLE http://23.11.3.35:8080 or http://127.0.0.1:8080"
 CONCOURSE_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
-POSTGRES_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
+OPSMAN_IMAGE_URL="https://storage.googleapis.com/ops-manager-us/pcf-gcp-2.3-build.170.tar.gz"
 OPSMAN_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
 OPSMAN_DECRYPT_PASSWORD-"<CHOOSE_COMPLEX_PASSWORD!>"
+STEMCELL_FILENAME="light-bosh-stemcell-97.18-google-kvm-ubuntu-xenial-go_agent.tgz - THIS IS STILL NOT AUTOMATED ENOUGH, PLEASE CHOOSE THE CORRECT STEMCELL NAME FROM PIVOTAL NETWORK"
 PRODUCT_VERSION="97\..*"
+POSTGRES_PASSWORD="<CHOOSE_COMPLEX_PASSWORD!>"
 ```
 ### Running
 
