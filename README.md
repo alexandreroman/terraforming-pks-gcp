@@ -2,6 +2,10 @@
 
 This Repo is based on  [https://github.com/pivotal-cf/terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp), the work at (https://github.com/making/terraforming-pks-gcp) and (https://github.com/dbbaskette/terraforming-pks-gcp).  The Concourse Pipline work has been completed and modified to keep from having to download a 3GB file locally to then just send it back up.
 
+### Disclaimer
+
+This pipeline is intended for education purposes only. It is not a supported or an official pipeline for PKS deployment on GCP.
+
 ### Prerequisites - Mac
 
 The prerequisites can all installed on your local system via brew, so if you don't have brew....go get it.   Your system needs the `gcloud` cli, fly-cli (concourse) as well as `gettext`, and of course, `Docker.  Here are the OS-X installation commands:
