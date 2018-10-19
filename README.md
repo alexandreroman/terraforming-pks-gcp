@@ -56,7 +56,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} --member "serviceAccount:${
 ### Var File
 
 I have tried to limit the number of variables you are required to provide to get going.  
-You Just fill out a variables.txt text file.
+You just fill out a variables.txt text file.
 
 **For security purposes, I do not include variables.txt in this repo**. There is a risk of populating this file with secrets such as your GCP service account and accidently push that back into git. This is very risky. Therefore - you should create a file called variables.txt under a "secrets" directory in your home directory (~/secrets/variables.txt). The parameters needed in this file are listed below:
 
