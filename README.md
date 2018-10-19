@@ -20,7 +20,7 @@ You can also just create a GCP small VM, clone the repo there, and install the n
 
 ![alt text](https://c2.staticflickr.com/2/1928/31547565408_20cb454ec6_c.jpg)
 
-If you go down that route - I HIGHLY recommend attaching a static IP to your VM, since concourse tends to go crazy when it's IP changes (you won't be able to login, and changing the parameters in a running concourse docker container is not fun).
+If you go down that route - I HIGHLY recommend attaching a static IP to your VM, since concourse tends to go crazy when its external IP changes (you won't be able to login, and changing the parameters in a running concourse docker container is not fun).
 
 ### GCP Account
 
