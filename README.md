@@ -18,7 +18,7 @@ chmod +x fly
 
 You can also just create a GCP small VM, clone the repo there, and install the needed tools using `sudo apt-get`. I've had much better success with an ubuntu based image than the default. The main advantage of using a GCP VM is that all downloads and uploads happen in GCP and therefore much faster. Also - you can close your computer and let the installation continue. Or better yet - monitor the progress from your phone! :)
 
-![alt text](http://url/to/img.png)
+![alt text](https://c2.staticflickr.com/2/1928/31547565408_20cb454ec6_c.jpg)
 
 If you go down that route - I HIGHLY recommend attaching a static IP to your VM, since concourse tends to go crazy when it's IP changes (you won't be able to login, and changing the parameters in a running concourse docker container is not fun).
 
