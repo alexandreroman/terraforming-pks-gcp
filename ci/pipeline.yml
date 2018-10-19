@@ -951,6 +951,7 @@ jobs:
 
           echo "Creating PKS CLI administrator user per PK tile documentation https://docs.pivotal.io/runtimes/pks/1-0/manage-users.html#uaa-scopes"
           # create pks admin user
+          uaac user delete "$PKS_CLI_USERNAME"
           uaac user add "$PKS_CLI_USERNAME" --emails "$PKS_CLI_USEREMAIL" -p "$PKS_CLI_PASSWORD"
           uaac member add pks.clusters.admin "$PKS_CLI_USERNAME"
           uaac member add pks.clusters.manage "$PKS_CLI_USERNAME"

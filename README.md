@@ -14,9 +14,8 @@ The prerequisites can all installed on your local system via brew, so if you don
 brew update
 brew install Caskroom/cask/google-cloud-sdk
 brew install gettext
-wget https://github.com/concourse/concourse/releases/download/v4.1.0/fly_darwin_amd64
-mv fly_darwin_amd64 /usr/local/bin/fly
-chmod +x fly
+brew link --force gettext
+brew cask install fly
 ```
 ### Prerequisites - GCP VM
 
@@ -92,7 +91,7 @@ Note: please make sure you have populated the `variables.txt` file above as ment
 
 From the `./ci` subdirectory:
 ```
-./run-pipeline.sh
+./run-pipeline.sh ~/secrets/variables.txt
 ```
 
 ### Monitoring Progress

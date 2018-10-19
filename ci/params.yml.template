@@ -21,7 +21,7 @@ tfvars: |
   project          = "$GCP_PROJECT_ID"
   region           = "$GCP_REGION"
   zones            = ["$GCP_ZONE_1", "$GCP_ZONE_2", "$GCP_ZONE_3"]
-  opsman_image_url = "$OPSMAN_IMAGE_URL 
+  opsman_image_url = "$OPSMAN_IMAGE_URL" 
   service_account_key = <<SERVICE_ACCOUNT_KEY
   $GCP_SERVICE_ACCOUNT_KEY
   SERVICE_ACCOUNT_KEY
