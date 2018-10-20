@@ -1,9 +1,11 @@
 #!/bin/bash
 set -o allexport
 
-echo "Welcome to GCP on PKS pipeline! Here's your security public service announcement:\n"
+echo "Welcome to GCP on PKS pipeline! Here's your security public service announcement:"
+echo ""
 echo "DO NOT place variables.txt file inside the git repo directory."
-echo "DO NOT place the GCP Service Account Key JSON inside the git repo directory.\n"
+echo "DO NOT place the GCP Service Account Key JSON inside the git repo directory."
+echo ""
 
 SECRETS_FILE=$1
 if [ "${SECRETS_FILE}" == "" ]; then
