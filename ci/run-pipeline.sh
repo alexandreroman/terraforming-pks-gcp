@@ -1,10 +1,14 @@
 #!/bin/bash
 set -o allexport
 
+echo "Welcome to GCP on PKS pipeline! Here's your security public service announcement:"
+echo "DO NOT place variables.txt file inside the git repo directory."
+echo "DO NOT place the GCP Service Account Key JSON inside the git repo directory."
+
 SECRETS_FILE=$1
 if [ "${SECRETS_FILE}" == "" ]; then
   echo "Using default variables location at $HOME/secrets/variables.txt"
-  echo "To override, provide full path to variables.txt as first argument."
+  echo "To override, provide full path to variables.txt as first argument (do not place variables.txt inside the git repo directory!)"
   SECRETS_FILE=$HOME/secrets/variables.txt
 fi
 
@@ -13,8 +17,20 @@ if [ ! -f ${SECRETS_FILE} ]; then
   exit 2
 fi
 
+if [[ ${SECRETS_FILE} == *"terraforming-pks-gcp"* ]]; then
+  echo "It appears you placed the variables file inside the git repo directory. Please place it outside the repo."
+  exit 1
+fi
+
+
 source ${SECRETS_FILE}
 set +o allexport
+
+if [[ ${GCP_SERVICE_ACCOUNT_KEY_PATH} == *"terraforming-pks-gcp"* ]]; then
+  echo "It appears you placed the GCP Service Account key.json inside the git repo directory. Please place it outside the repo."
+  exit 1
+fi
+
 
 # MAKE SERVICE ACCOUNT KEY 1 LINE FOR EASIER
 export GCP_SERVICE_ACCOUNT_KEY=$(tr -d '\n' < $(echo $GCP_SERVICE_ACCOUNT_KEY_PATH))
