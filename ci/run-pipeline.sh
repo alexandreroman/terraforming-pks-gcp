@@ -3,8 +3,8 @@ set -o allexport
 
 SECRETS_FILE=$1
 if [ "${SECRETS_FILE}" == "" ]; then
-  echo "Missing secrets file"
-  exit 1
+  echo "Using default variables location at ~/secrets/variables.txt"
+  SECRETS_FILE="~/secrets/variables.txt"
 fi
 
 if [ ! -f ${SECRETS_FILE} ]; then
@@ -22,7 +22,9 @@ envsubst < params.yml.template > params.yml
 
 ./scripts/concourse-start.sh
 
-fly -t pks login -c ${CONCOURSE_URL} -u concourse -p ${CONCOURSE_PASSWORD}
+#CONCOURSE_URL is the external facing URL, since we run the docker container on the same machine, 
+#127.0.0.1 would always work and doesn't require access to the public web.
+fly -t pks login -c 127.0.0.1:8080 -u concourse -p ${CONCOURSE_PASSWORD}
 fly -t pks sync
 fly -t pks set-pipeline -p deploy-pks -c pipeline.yml -l params.yml -n
 fly -t pks unpause-pipeline -p deploy-pks
