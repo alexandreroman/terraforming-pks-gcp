@@ -3,7 +3,7 @@ set -o allexport
 
 SECRETS_FILE=$1
 if [ "${SECRETS_FILE}" == "" ]; then
-  echo "Using default variables location at ~/secrets/variables.txt"
+  echo "Using default variables location at $HOME/secrets/variables.txt"
   SECRETS_FILE=$HOME/secrets/variables.txt
 fi
 
