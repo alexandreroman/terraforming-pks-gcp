@@ -25,6 +25,12 @@ if [[ ${SECRETS_FILE} == *"../"* ]]; then
   exit 1
 fi
 
+if [[ ${SECRETS_FILE} != *"/"* ]]; then
+  echo "Please use an absolute path for the variables.txt."
+  exit 1
+fi
+
+
 if [ ! -f ${SECRETS_FILE} ]; then
   echo "Secrets file not found: ${SECRETS_FILE}"
   exit 2
