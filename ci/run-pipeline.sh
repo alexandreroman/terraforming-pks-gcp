@@ -75,7 +75,7 @@ envsubst < params.yml.template > params.yml
 
 #CONCOURSE_URL is the external facing URL, since we run the docker container on the same machine, 
 #127.0.0.1 would always work and doesn't require access to the public web.
-fly -t pks login -c 127.0.0.1:8080 -u concourse -p ${CONCOURSE_PASSWORD}
+fly -t pks login -c http://127.0.0.1:8080 -u concourse -p ${CONCOURSE_PASSWORD}
 fly -t pks sync
 fly -t pks set-pipeline -p deploy-pks -c pipeline.yml -l params.yml -n
 fly -t pks unpause-pipeline -p deploy-pks
