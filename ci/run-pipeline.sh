@@ -10,7 +10,8 @@ echo ""
 SECRETS_FILE=$1
 if [ "${SECRETS_FILE}" == "" ]; then
   echo "Using default variables location at $HOME/secrets/variables.txt"
-  echo "To override, provide full path to variables.txt as first argument (do not place variables.txt inside the git repo directory!)"
+  echo "To override, provide full path to variables.txt as first argument"
+  echo "(do not place variables.txt inside the git repo directory!)"
   SECRETS_FILE=$HOME/secrets/variables.txt
 fi
 
