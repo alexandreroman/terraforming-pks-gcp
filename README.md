@@ -90,8 +90,15 @@ Note: please make sure you have populated the `variables.txt` file above as ment
 ### Standing up environment
 
 From the `./ci` subdirectory:
+
+To use the default variables.txt location (~/secrets/variables.txt):
 ```
-./run-pipeline.sh ~/secrets/variables.txt
+./run-pipeline.sh
+```
+
+To provide a custom location for variables.txt, provide the full path as the first argument, for example:
+```
+./run-pipeline.sh ~/variables.txt
 ```
 
 ### Monitoring Progress
