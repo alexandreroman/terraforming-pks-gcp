@@ -51,6 +51,20 @@ if [[ ${GCP_SERVICE_ACCOUNT_KEY_PATH} == *"terraforming-pks-gcp"* ]]; then
   exit 1
 fi
 
+if [[ ${GCP_SERVICE_ACCOUNT_KEY_PATH} == *"./"* ]]; then
+  echo "Please use an absolute path for the GCP_SERVICE_ACCOUNT_KEY_PATH."
+  exit 1
+fi
+
+if [[ ${GCP_SERVICE_ACCOUNT_KEY_PATH} == *"../"* ]]; then
+  echo "Please use an absolute path for the GCP_SERVICE_ACCOUNT_KEY_PATH."
+  exit 1
+fi
+
+if [[ ${GCP_SERVICE_ACCOUNT_KEY_PATH} != *"/"* ]]; then
+  echo "Please use an absolute path for the GCP_SERVICE_ACCOUNT_KEY_PATH."
+  exit 1
+fi
 
 # MAKE SERVICE ACCOUNT KEY 1 LINE FOR EASIER
 export GCP_SERVICE_ACCOUNT_KEY=$(tr -d '\n' < $(echo $GCP_SERVICE_ACCOUNT_KEY_PATH))
