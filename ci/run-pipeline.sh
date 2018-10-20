@@ -20,7 +20,8 @@ if [ ! -f ${SECRETS_FILE} ]; then
 fi
 
 if [[ ${SECRETS_FILE} == *"terraforming-pks-gcp"* ]]; then
-  echo "It appears you placed the variables file inside the git repo directory. Please place it outside the repo."
+  echo "It appears you placed variables.txt file inside the git repo directory."
+  echo "Please place it outside the repo."
   exit 1
 fi
 
