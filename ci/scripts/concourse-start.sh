@@ -18,7 +18,9 @@ docker run --name concourse-db \
   -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
   -e POSTGRES_DB=atc \
   -d postgres 
-  
+
+sleep 5
+
 echo "Creating Concourse Intance"
 docker run  --name concourse   -d\
   -h concourse \
