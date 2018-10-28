@@ -523,7 +523,7 @@ jobs:
               --force-key-file-overwrite \
               --strict-host-key-checking=no \
               --quiet \
-              --command "~/om-linux --target https://localhost -k -u ${OPS_MGR_USR} -p ${OPS_MGR_PWD} --request-timeout 3600 upload-product -p ${FILENAME}"   
+              --command "~/om-linux --target https://localhost -k -u "${OPS_MGR_USR}" -p "${OPS_MGR_PWD}" --request-timeout 3600 upload-product -p ${FILENAME}"   
 
           PRODUCT_NAME=`basename $FILENAME .pivotal | python -c 'print("-".join(raw_input().split("-")[:-2]))'`
           PRODUCT_VERSION=`basename $FILENAME .pivotal | python -c 'print("-".join(raw_input().split("-")[-2:]))'`
@@ -534,7 +534,7 @@ jobs:
               --force-key-file-overwrite \
               --strict-host-key-checking=no \
               --quiet \
-              --command "~/om-linux --target https://localhost -k -u ${OPS_MGR_USR} -p ${OPS_MGR_PWD} stage-product -p ${PRODUCT_NAME} -v ${PRODUCT_VERSION}" 
+              --command "~/om-linux --target https://localhost -k -u ${OPS_MGR_USR} -p "${OPS_MGR_PWD}" stage-product -p ${PRODUCT_NAME} -v ${PRODUCT_VERSION}" 
 
 - name: config-pks
   build_logs_to_retain: 5
